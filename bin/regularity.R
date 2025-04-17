@@ -114,7 +114,7 @@ averagePerBin <- function(x, binsize, mcolnames=NULL, overlap = NULL, ref_positi
     seqlevels(bins) <- seqlevels(x)
     seqinfo(bins) <- seqinfo(x)
     bins <- bins %>% 
-      #trim() %>%
+      trim() %>%
       as_tibble() %>% 
       split(f = .$seqnames) %>%
       map(~as_iranges(.)) %>%
@@ -125,7 +125,7 @@ averagePerBin <- function(x, binsize, mcolnames=NULL, overlap = NULL, ref_positi
                         cut.last.tile.in.chrom = T)
     windows <- resize(tiles, binsize) # you will get a warning about trimming
     bins <- windows %>% 
-      # trim() %>% 
+      trim() %>% 
       as_tibble() %>%
       split(f = .$seqnames) %>%
       map(~as_iranges(.)) %>%
@@ -260,6 +260,7 @@ rankedDat <- averagePerBin(var_out,
   rankedDat <- cbind(rankedDat,if (!is.null(ref_positions)){(nucID <- paste0("nuc",1:length(rankedDat$start)))}else{paste0("bin",1:length(rankedDat$start))}) %>%
   group_by(seqnames, start, end) %>% 
   ungroup() %>% 
+  filter(width > 500) %>% #bins are trimmed at the ends and starts of chromosomes
   arrange(score) %>% 
   mutate(var_rank = 1:n(),
          var_rank = var_rank/max(var_rank),

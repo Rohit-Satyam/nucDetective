@@ -231,7 +231,10 @@ var_out <- psd_log10_gr %>%
   filter(!is.na(score)) %>%
   as_granges()
 
-seqlengths(var_out) <- chrSizes$size
+#extract correct chrom sizes
+chrSizes.match<-chrSizes$size[match(names(seqlengths(var_out)),chrSizes$seqnames)]
+
+seqlengths(var_out) <- chrSizes.match
 write_bigwig(var_out, file = paste0("10xlogPSD_var_RollingWindow.bw"))
 
 # Output of mean track
@@ -240,7 +243,7 @@ mean_out <- psd_log10_gr %>%
   filter(!is.na(score)) %>%
   as_granges()
 
-seqlengths(mean_out) <- chrSizes$size
+seqlengths(mean_out) <- chrSizes.match
 write_bigwig(mean_out, file = paste0("10xlogPSD_mean_RollingWindow.bw"))
 
 

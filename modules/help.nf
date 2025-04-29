@@ -42,6 +42,7 @@ def helpMessage() {
     inspector optional arguments:
     --regularity_ref     [boolean] Use reference map as reference positions for regularity (default: true)
     --normalize_profiles [boolean] Normalize nucleosome profile prior to analysis (default: true)
+    --detect_shift       [boolean] Detect shift in nucleosome position (default: true)
 
      """.stripIndent()
      println ''

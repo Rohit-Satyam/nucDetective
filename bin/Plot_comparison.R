@@ -17,13 +17,11 @@ names <- c()
 txt_summary <- matrix(data = NA, nrow = length(txt_output), ncol = 5)
 for (i in 1:length(txt_output)){
   df <- read.table(txt_output[i], header = T, sep = "\t")
-  lost_matrix[1, i] <- df$Sequenced
-  lost_matrix[2, i] <- df$Sequenced - df$Trimmed
-  lost_matrix[3, i] <- df$Sequenced - df$Aligned
-  lost_matrix[4, i] <- (df$Sequenced - df$MAPQC.filtered) -
-    lost_matrix["Not aligned", i]
-  lost_matrix[5, i] <- (df$Sequenced - (df$Nucleosomes)) - 
-    (lost_matrix["Quality-filtered", i] + lost_matrix["Not aligned", i])
+  lost_matrix[1, i] <- df$Sequenced # total
+  lost_matrix[2, i] <- df$Sequenced - df$Trimmed # adapter sequences
+  lost_matrix[3, i] <- df$Trimmed - df$Aligned # not aligned
+  lost_matrix[4, i] <- (df$Aligned - df$MAPQC.filtered) # Quality filtered
+  lost_matrix[5, i] <- df$MAPQC.filtered - (df$Nucleosomes) #blacklist and sizes flt
   lost_matrix[6, i] <- df$Nucleosomes
   names[i] <- rownames(df)
   colnames(txt_summary) <- colnames(df)

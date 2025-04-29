@@ -99,7 +99,7 @@ highFuzNucs <- ranked_dat %>% filter(var_rank>=cutOffval) %>% pull(nucID)
 # Plot 
 png(paste0("dynFUZZ_selection.png"),width = 1280, height = 1280, res =300)
 plot(ranked_dat$var_rank, ranked_dat$norm_var,
-     ylab = "norm 10xLog of reference position", 
+     ylab = "variance score of nucleosome fuzziness", 
      xlab = "norm rank", bty = "n", pch = 19)
 points(ranked_dat$var_rank[cutOff:length(ranked_dat$norm_var)],
        ranked_dat$norm_var[cutOff:length(ranked_dat$norm_var)],

@@ -85,8 +85,12 @@ workflow inspector{
 
           // dynamic nucleosomes
           occupancy(score_peaks.out[0])
-          shift(reference_map.out, bw_ch.collect())
-
+          
+          //shift nucleosomes
+          if(params.detect_shift){
+            shift(reference_map.out, bw_ch.collect())
+          }
+          
           //fuzziness of nucleosomes
           fuzziness(reference_map.out, nucs2bed.out[1].collect())
 

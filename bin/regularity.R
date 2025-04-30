@@ -267,7 +267,8 @@ rankedDat <- averagePerBin(var_out,
   arrange(score) %>% 
   mutate(var_rank = 1:n(),
          var_rank = var_rank/max(var_rank),
-         norm_var = score/max(score))
+         norm_var = score/max(score))  %>% 
+  arrange(desc(norm_var))
 
 if (!is.null(ref_positions)){
 colnames(rankedDat)[7]<-"nucID"}else{colnames(rankedDat)[7]<-"bins"}
@@ -283,7 +284,7 @@ loess.line<-predict(lm)
 #calculate the first derivative
 loess.f1<-diff(loess.line)/diff(rankedDat$var_rank)
 
-cutOff<-max(which(loess.f1<3))+1
+cutOff<-max(which(loess.f1<cutoff_slope))+1
 cutOffval<- rankedDat$var_rank[cutOff]
 # Plot cutoff
 png(paste0("bs", binSize,"_varRegularity_selection.png"),width = 1280, height = 1280, res =300)

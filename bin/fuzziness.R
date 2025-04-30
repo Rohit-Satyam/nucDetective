@@ -131,6 +131,7 @@ colnames(refFuzTableAllTP)[1] <- "seqnames"
 refFuzTableAllTP %>% 
   dplyr::select(-c(name, score, timepoints, fuzzinessScore, category)) %>% 
   distinct() %>% 
+  arrange(desc(varFuzz)) %>%  
   mutate(name = nucID,
          score = varFuzz) %>% 
   filter(highFuzVariance) %>% 

@@ -176,7 +176,7 @@ colnames(chrSizes) <- c("seqnames","size")
 
 ## For parallelisation
 
-plan(multisession, workers = 4)
+plan(multicore, workers = 4)
 
 # Get PSD for each timepoint
 inFiles %>%

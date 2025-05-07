@@ -267,8 +267,7 @@ rankedDat <- averagePerBin(var_out,
   arrange(score) %>% 
   mutate(var_rank = 1:n(),
          var_rank = var_rank/max(var_rank),
-         norm_var = score/max(score))  %>% 
-  arrange(desc(norm_var))
+         norm_var = score/max(score))  
 
 if (!is.null(ref_positions)){
 colnames(rankedDat)[7]<-"nucID"}else{colnames(rankedDat)[7]<-"bins"}
@@ -303,7 +302,7 @@ dev.off()
 rankedDat %>%mutate(name = nucID)%>%
   dplyr::select(-c(width))%>%
   filter(var_rank > cutOffval) %>% 
-  as_granges()%>%
+  arrange(desc(norm_var))%>%as_granges()%>%
   write_bed(file = paste0("Irregular_Regions_bs",binSize, "_10xlog.bed"))
 
 

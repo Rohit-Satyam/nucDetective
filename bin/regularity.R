@@ -73,11 +73,7 @@ get_psd_avgNRL <- function(x, avgNRL, outPath) {
   psd_dat <- readRDS(x)
   # get name of current time point
   ctp <- x %>% basename() %>% 
-    tools::file_path_sans_ext() %>%
-    str_split(pattern = "_",simplify = T) %>%
-    .[1,4] %>%
-    str_split(pattern = "\\.",simplify = T) %>% 
-    .[1,1]
+    tools::file_path_sans_ext() 
   
   # Round and filter for NRL nearest to avg NRL
   psd_gr <- psd_dat %>%

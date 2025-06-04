@@ -12,6 +12,11 @@ suppressMessages(library(zoo))
 library(furrr)
 
 args <- commandArgs(TRUE)
+# extract average NRL from args
+avgNRL <- as.numeric(args[length(args)])
+# remove the last argument (avgNRL) from args
+args <- args[-length(args)]
+
 # Functions ---------------------------------------------------------------
 
 # Calculate spectral power density and return the spectra
@@ -201,7 +206,7 @@ inFiles %>%
   })
 
 # Extract track nearest to observed/expected average NRL  -----------------
-avgNRL <- 180
+
 
 psd_files <- list.files(pattern = "*.rds", full.names = T)
 
@@ -295,7 +300,8 @@ dev.off()
 
 # select the peaks with highest variance and write beds
 
-rankedDat %>%mutate(name = nucID)%>%
+rankedDat %>%
+  mutate(name = ifelse(!is.null(ref_positions),nucID,bins))%>%
   dplyr::select(-c(width))%>%
   filter(var_rank > cutOffval) %>% 
   arrange(desc(norm_var))%>%as_granges()%>%

@@ -21,7 +21,7 @@ process regularity{
     
     script:
   """
-  regularity.R $sampleID $bw $params.chrSizes
+  regularity.R $sampleID $bw $params.chrSizes $params.avgNRL
   """
 }
 
@@ -49,6 +49,6 @@ process regularity_reference{
     
     script:
   """
-  regularity.R $sampleID $bw $params.chrSizes $reference_positions
+  regularity.R $sampleID $bw $params.chrSizes $reference_positions $params.avgNRL
   """
 }

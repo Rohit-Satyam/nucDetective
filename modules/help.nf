@@ -43,6 +43,7 @@ def helpMessage() {
     --regularity_ref     [boolean] Use reference map as reference positions for regularity (default: true)
     --normalize_profiles [boolean] Normalize nucleosome profile prior to analysis (default: true)
     --detect_shift       [boolean] Detect shift in nucleosome position (default: true)
+    --avgNRL             [integer] Average NRL used for nucleosome array regularity analysis (default: 180)
 
      """.stripIndent()
      println ''

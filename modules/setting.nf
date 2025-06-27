@@ -15,6 +15,7 @@ def settings() {
                   chrSizes:             ${params.chrSizes}
 
                   General options
+                  container_engine:     ${params.container_engine}
                   analysis:             ${params.analysis}
                   blacklist:            ${params.blacklist}
                   genomeSize:           ${params.genomeSize}

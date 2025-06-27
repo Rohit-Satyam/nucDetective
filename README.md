@@ -95,7 +95,8 @@ Once `Profiler` is completed the `Inpector` can be instructed to analyze nucleos
 * A cpu with a least 4 cores.
 
 ### Other requirements
-* [`Docker`](https://www.docker.com/) and [`nextflow`](https://www.nextflow.io/) are required to run the nucDetective pipeline. Additional software used in the pipeline is packaged in Docker containers and is automatically downloaded during the first execution of the pipeline.
+* [`Docker`](https://www.docker.com/) or [`Singularity`](https://github.com/sylabs/singularity/) and [`nextflow`](https://www.nextflow.io/) are required to run the nucDetective pipeline. Additional software used in the pipeline is packaged in Docker containers and is automatically downloaded during the first execution of the pipeline.
+* `Docker` is the default profile. Use `--container_engine singularity` to run it on `Singularity`
 * The pipeline is compatible with all computational infrastructures. Executing the pipeline on cloud or HPC systems may require to adapt the [`nextflow.config`](https://www.nextflow.io/docs/latest/basic.html).
 * The pipeline requires paired-end sequencing data
 * Bowtie2 index of reference genome, reference genome in fasta format and the length of the mappable genome.

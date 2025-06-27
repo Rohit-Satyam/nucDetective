@@ -3,7 +3,6 @@
 ## Requirements
 *Docker (tested with v4.17.0)
 *nextflow (tested with version 25.02.3-edge)
-*Bowtie2 (tested with version 2.3.4.3)
 *R (tested with version 4.4.1)
 *R package stringr (tested with version 1.5.1)
 

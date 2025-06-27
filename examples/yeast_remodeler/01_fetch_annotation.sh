@@ -18,7 +18,7 @@ gunzip genes_sacCer3.gtf.gz
 # Create bowtie2 index from the reference genome
 mkdir Bowtie2Index
 docker run -i -v $MY_PWD"/data":$MY_PWD"/data" uschwartz/core_docker:v1.0 \
-bowtie2-build genome_sacCer3.fa Bowtie2Index/genome
+bowtie2-build $MY_PWD"/data/genome_sacCer3.fa" $MY_PWD"/data/Bowtie2Index/genome"
 
 # Get the nucDetective pipeline
 cd ..

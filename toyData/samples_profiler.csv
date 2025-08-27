@@ -1,0 +1,7 @@
+Sample_Name,path_fwdReads,path_revReads,Condition
+W1118_replicate_1,/toyData/fastq/W1118_replicate_1_1.fastq.gz,/toyData/fastq/W1118_replicate_1_2.fastq.gz,W1118
+W1118_replicate_2,/toyData/fastq/W1118_replicate_2_1.fastq.gz,/toyData/fastq/W1118_replicate_2_2.fastq.gz,W1118
+ACF1_replicate_1,/toyData/fastq/ACF1_replicate_1_1.fastq.gz,/toyData/fastq/ACF1_replicate_1_2.fastq.gz,ACF1
+ACF1_replicate_2,/toyData/fastq/ACF1_replicate_2_1.fastq.gz,/toyData/fastq/ACF1_replicate_2_2.fastq.gz,ACF1
+yw_replicate_1,/toyData/fastq/yw_replicate_1_1.fastq.gz,/toyData/fastq/yw_replicate_1_2.fastq.gz,yw
+yw_replicate_2,/toyData/fastq/yw_replicate_2_1.fastq.gz,/toyData/fastq/yw_replicate_2_2.fastq.gz,yw

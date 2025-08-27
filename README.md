@@ -105,7 +105,13 @@ Once `Profiler` is completed the `Inpector` can be instructed to analyze nucleos
 You can obtain the pipeline directly from GitHub:
 ```bash
 git clone https://github.com/uschwartz/nucDetective
+```
+### Test pipeline
+The pipeline comes with a ready-to-use test data set.
+```bash
+nextflow run <path2nucDetective>/nucDetective/ --test
 
+nextflow run <path2nucDetective>/nucDetective/ --analysis 'inspector' --test
 ```
 
 ## Usage
@@ -184,3 +190,14 @@ nextflow run /nucDetective/ \
 -w ./work_inspector
 ```
 Required options are:  `--analysis inspector`, `--csvInput`, `--outDir`, `--chrSizes`, `--genomeSize`.    
+
+## Contact
+
+Please log all issues/suggestions on the nucDetective GitHub page: https://github.com/uschwartz/nucDetective/issues
+
+Uwe Schwartz: uwe.schwartz@ur.de
+
+## Cite
+
+Simon Holzinger et al. , Deciphering chromatin architecture and dynamics in Plasmodium falciparum using the nucDetective pipeline.
+bioRxiv DOI: 10.1101/2025.08.13.670116 (https://doi.org/10.1101/2025.08.13.670116)

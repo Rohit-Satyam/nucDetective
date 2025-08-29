@@ -22,41 +22,50 @@ for (i in 1:length(nucRef)){
     for(j in 1:length(names.bw)){
         bw.vals<-import.bw(con=files.bw[j],
                            which=queryRef)
-        #############
-        #get midpoint of data
-        pos<-(end(bw.vals)+start(bw.vals))/2
-        lm<-loess(bw.vals$score~pos, span=0.6)
-        lm.fkt<-predict(lm)
-        
-        # get local maxima
-        maxima<-pos[which(diff(sign(diff(lm.fkt)))==-2)+1]
-        
-        #if more maxima available
-        if(length(maxima)>1){
-            maxima<-maxima[which.max(lm.fkt[which(diff(sign(diff(lm.fkt)))==-2)+1])]
-        }
-        
-        # in case no local maxima available assign NA
-        if(!(length(maxima)>0)){
+        # in case no signal at position available assign NA
+        if(!(length(bw.vals)>0)){
             max.pos<-NA
             max.score<-NA
             
             ##store results in vector
             if(j==1) max.pos.v<-max.pos else max.pos.v<-c(max.pos.v,max.pos)
             if(j==1) max.score.v<-max.score else max.score.v<-c(max.score.v,max.score)
-        } else {
-            # nuc occupancy at summit
-            max.score<-max(lm.fkt[which(diff(sign(diff(lm.fkt)))==-2)+1])
+        } else { 
+            #############
+            #get midpoint of data
+            pos<-(end(bw.vals)+start(bw.vals))/2
+            lm<-loess(bw.vals$score~pos, span=0.6)
+            lm.fkt<-predict(lm)
             
-            #select summit position
-            max.pos<-maxima
+            # get local maxima
+            maxima<-pos[which(diff(sign(diff(lm.fkt)))==-2)+1]
             
-            ##store results in vector
-            if(j==1) max.pos.v<-max.pos else max.pos.v<-c(max.pos.v,max.pos)
-            if(j==1) max.score.v<-max.score else max.score.v<-c(max.score.v,max.score)
+            #if more maxima available
+            if(length(maxima)>1){
+                maxima<-maxima[which.max(lm.fkt[which(diff(sign(diff(lm.fkt)))==-2)+1])]
+            }
+            
+            # in case no local maxima available assign NA
+            if(!(length(maxima)>0)){
+                max.pos<-NA
+                max.score<-NA
+                
+                ##store results in vector
+                if(j==1) max.pos.v<-max.pos else max.pos.v<-c(max.pos.v,max.pos)
+                if(j==1) max.score.v<-max.score else max.score.v<-c(max.score.v,max.score)
+            } else {
+                # nuc occupancy at summit
+                max.score<-max(lm.fkt[which(diff(sign(diff(lm.fkt)))==-2)+1])
+                
+                #select summit position
+                max.pos<-maxima
+                
+                ##store results in vector
+                if(j==1) max.pos.v<-max.pos else max.pos.v<-c(max.pos.v,max.pos)
+                if(j==1) max.score.v<-max.score else max.score.v<-c(max.score.v,max.score)
+            }
+            
         }
-        
-
     }
     # assign timepoints to vectors
     names(max.score.v)<-names.bw

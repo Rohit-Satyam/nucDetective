@@ -1,5 +1,5 @@
 #!/usr/bin/env Rscript
-args <- commandArgs(TRUE)
+args <-  commandArgs(TRUE)
 
 library(rtracklayer)
 library(GenomicRanges)
@@ -28,7 +28,8 @@ for(a in seq_along(timepoint_peaks)) {
 
   # create Hits object, to later exclude them from query/ subject
   temp_overlap <- findOverlaps(query1, subject1, minoverlap = 100)
-
+  
+  if(length(temp_overlap)>0){
   # create Pairs object to reduce regions pairwaise
   temp_pairs <- findOverlapPairs(query1, subject1, minoverlap = 100)
 
@@ -62,6 +63,8 @@ for(a in seq_along(timepoint_peaks)) {
 
   # create query for next comparison step with regions: Overlapping, only in query, only in subject
   newquery <- c(p_reduce, exactOvrl ,only_A, only_B)
+  } else { newquery <- c(query1, subject1) }
+  
   # empty GRanges again for next pairwise reduction
   p_reduce <- GRanges()
 }

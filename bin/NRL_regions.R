@@ -13,10 +13,10 @@ library(plyr)
 
 #adjusted calcPhasogramm from 'swissknife' to only load regions
 calcPhasogram_regions <- function(fname, regions=NULL, rmdup=TRUE, dmax=3000L) {
-  
+
   cnt <- numeric(dmax)
   names(cnt) <- as.character(seq.int(dmax))
-  
+
   # get chromosomes from bam header
   bh <- Rsamtools::scanBamHeader(fname[1])[[1]]$targets
   chrs <- names(bh)
@@ -27,7 +27,7 @@ calcPhasogram_regions <- function(fname, regions=NULL, rmdup=TRUE, dmax=3000L) {
     chrs <- intersect(chrs, names(regL))
     regL <- regL[chrs]
   }
-  
+
   # for each chromosome, ...
   for (i in seq_along(chrs)) {
     posPL <- posML <- list()
@@ -63,7 +63,7 @@ calcPhasogram_regions <- function(fname, regions=NULL, rmdup=TRUE, dmax=3000L) {
     cnt <- calcAndCountDist(posP, posP, cnt) # plus strand
     cnt <- calcAndCountDist(posM, posM, cnt) # minus strand
   }
-  
+
   return(cnt)
 }
 
@@ -122,15 +122,11 @@ ylim1<- boxplot.stats(nrls_values$nrls)$stats[c(1,5)]
 
 meds <- ddply(nrls_values, .(condition), summarise, med = round(median(nrls, na.rm = T),digits=2))
 
-pdf(paste0("Boxplot_of_NRL_in_regions",fileNames".pdf"))
+pdf(paste0("Boxplot_of_NRL_in_regions",fileNames,".pdf"))
 ggplot(nrls_values, aes(x = condition, y = nrls)) +
   geom_boxplot()+
   coord_cartesian(ylim = ylim1*1.05)+
   labs(title = paste0("NRLs ", fileNames))+ xlab(condition)+ ylab("NRLs")+theme(axis.text.x = element_blank())+
-  geom_text(data = meds, aes(x = condition, y = med, label = med), 
+  geom_text(data = meds, aes(x = condition, y = med, label = med),
             size = 3, vjust = -0.5)
 dev.off()
-
-
-
-

@@ -1,4 +1,12 @@
 process regularity{
+  
+  if(params.container_engine == 'docker'){
+    containerOptions "-v \$(dirname ${params.chrSizes}):\$(dirname ${params.chrSizes})"
+  }
+  if(params.container_engine == 'singularity'){
+    containerOptions "-B \$(dirname ${params.chrSizes}):\$(dirname ${params.chrSizes})"
+  }  
+
     container 'leoschmutterer/regularity:v1.1'
     cpus = 4
     memory = { 15.GB * task.cpus }
@@ -26,6 +34,13 @@ process regularity{
 }
 
 process regularity_reference{
+  if(params.container_engine == 'docker'){
+    containerOptions "-v \$(dirname ${params.chrSizes}):\$(dirname ${params.chrSizes})"
+  }
+  if(params.container_engine == 'singularity'){
+    containerOptions "-B \$(dirname ${params.chrSizes}):\$(dirname ${params.chrSizes})"
+  }  
+
     container 'leoschmutterer/regularity:v1.1'
     cpus = 4
     memory = { 15.GB * task.cpus }

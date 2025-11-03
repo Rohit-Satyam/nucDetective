@@ -1,0 +1,7 @@
+Sample_Name,path_wig,normalize,Condition
+ACF1_replicate_1,/toyData/wig/ACF1_replicate_1_profile.wig,Norm,ACF1
+ACF1_replicate_2,/toyData/wig/ACF1_replicate_2_profile.wig,Norm,ACF1
+W1118_replicate_1,/toyData/wig/W1118_replicate_1_profile.wig,Reference,W1118
+W1118_replicate_2,/toyData/wig/W1118_replicate_2_profile.wig,Norm,W1118
+yw_replicate_1,/toyData/wig/yw_replicate_1_profile.wig,Norm,yw
+yw_replicate_2,/toyData/wig/yw_replicate_2_profile.wig,Norm,yw

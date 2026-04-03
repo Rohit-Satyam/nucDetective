@@ -66,9 +66,7 @@ if( params.analysis == 'profiler' ) {
         .map { row -> tuple(row.Sample_Name, resolvePath(row.path_wig), row.normalize) }
         .set { samples_wig_ch }
 
-    Channel
-        .fromPath(params.csvInput)
-        .splitCsv(header: true)
+    readCsvRows()
         .map { row -> tuple(row.Sample_Name, row.condition) }
         .set { condition_ch }
 

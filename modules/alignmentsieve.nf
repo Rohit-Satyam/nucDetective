@@ -12,6 +12,7 @@ if(params.blacklist && params.container_engine == 'singularity'){
   memory { params.genomeSize > 200000000 ? '15.GB' : '7.GB'}
   publishDir "${params.outDir}/QC/07_ALIGNMENT_FILTERING/", mode: 'copy', pattern: "*_FiltLog.txt"
   publishDir "${params.outDir}/RUN/00_ALIGNMENT/monoNuc", mode: 'copy', pattern: "*_monoNuc.bam", enabled:params.publishBamFlt
+  publishDir "${params.outDir}/RUN/00_ALIGNMENT/monoNuc", mode: 'copy', pattern: "*_monoNuc.bam.bai"
 
   input:
   tuple val(sampleID), file(bam), file(idx)
